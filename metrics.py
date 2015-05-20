@@ -18,3 +18,15 @@ def trapz(x, y):
         area += 0.5*(sx[ix+1]-sx[ix])*(sy[ix+1]+sy[ix])
     return area
 
+def auc(y_true, y_score):
+
+    for y in y_true:
+        if(y > 1 or y < 0):
+            raise ValueError("y_true contains not valid data")
+
+    assert len(y_true) == len(y_score), "y_true and y_score must be of the same length"
+
+    return np.trapz(y_true, x=y_score)
+
+if __name__ == '__main__':
+    print(auc([0, 1, 0, 1], [0.1, 0.4, 0.35, 0.8]))
